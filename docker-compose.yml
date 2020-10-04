@@ -1,0 +1,18 @@
+version: "3.6"
+
+services:
+  dev_env:
+    tty: true
+    image: ${NAME}:${TAG}
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      network: host
+    container_name: ${NAME}
+    network_mode: host
+    volumes:
+      - ${PATH_TO_T32}:/t32
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    environment:
+      - DISPLAY=$DISPLAY
+      - QT_X11_NO_MITSHM=1
